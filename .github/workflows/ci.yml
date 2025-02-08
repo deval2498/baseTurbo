@@ -37,5 +37,5 @@ jobs:
           context: .
           file: apps/server/Dockerfile
           push: true
-          tags: deval2498/videoStreamerBackend:latest
+          tags: deval2498/baserepo:latest #change to your docker repo
     
