@@ -1,0 +1,14 @@
+{
+  "extends": "@repo/typescript-config/server.json",
+  "compilerOptions": {
+    "rootDir": "./src",      // Relative to the server application's directory
+    "outDir": "./dist",      // Relative to the server application's directory
+    "baseUrl": ".",          // Optional: Adjust based on your module resolution needs
+    "paths": {               // Optional: Define path aliases if needed
+      "@server/*": ["src/*"]
+    },
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

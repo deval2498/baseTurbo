@@ -1,0 +1,31 @@
+{
+  "name": "videostreamer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dotenvx": "dotenvx",
+    "build": "dotenvx run -- turbo build",
+    "dev": "dotenvx run -- turbo dev",
+    "lint": "dotenvx run -- turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "validate-env": "ts-node ./validate-env.ts"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0",
+    "prettier": "^3.2.5",
+    "turbo": "^2.3.3",
+    "typescript": "5.5.4"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.33.0",
+    "dotenv": "^16.4.7"
+  }
+}

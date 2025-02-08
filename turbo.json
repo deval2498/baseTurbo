@@ -1,0 +1,57 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [],
+  "globalDependencies": ["**/.env"],
+  "tasks": {
+    "//#validate-env": {
+      "cache": false,
+      "persistent": false
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "server#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "PORT"
+      ]
+    },
+    "server#dev": {
+      "dependsOn": ["//#validate-env"],
+      "env": [
+        "PORT"
+      ]
+    },
+    "web#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "API_HOST"
+      ]
+    },
+    "web#dev": {
+      "dependsOn": ["//#validate-env"],
+      "env": [
+        "API_HOST"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "cache": false
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "dependsOn": ["//#validate-env"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

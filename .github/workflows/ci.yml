@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up docker build
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      
+      - name: Build docker image
+        run: docker build -t backend:latest -f apps/server/Dockerfile .
+      
+      - name: Login to docker hub
+        uses: docker/login-action@v2
+        with: 
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      
+      - name: Build and push docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: apps/server/Dockerfile
+          push: true
+          tags: deval2498/videoStreamerBackend:latest
+    
