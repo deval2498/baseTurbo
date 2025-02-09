@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main  # Runs automatically when YOU push to main
-  pull:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
