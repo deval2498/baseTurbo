@@ -24,6 +24,11 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+
+      - name: Set up Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          export KUBECONFIG=kubeconfig
       
       - name: Login to docker hub
         if: github.event_name == 'push'
@@ -40,4 +45,15 @@ jobs:
           file: apps/server/Dockerfile
           push: true
           tags: deval2498/baserepo-staging:${{ github.sha }} #change to your docker repo
+      
+      - name: Update Deployment YAML with SHA
+        run: |
+          sed -i "s|PLACEHOLDER_TAG|${{ github.sha }}|g" k8s/deployment.yaml
+      
+      - name: Apply Kubernetes Manifests
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/ingress.yaml
+      
     
