@@ -19,4 +19,4 @@ spec:
             - containerPort: 5005
           env:
             - name: PORT
-              value: 5005
+              value: "5005"
