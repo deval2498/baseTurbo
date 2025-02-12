@@ -8,11 +8,11 @@ metadata:
 spec:
   tls:
     - hosts:
-        - staging-baserepo.deval2498.com  # Change to your domain
-        - www.staging-baserepo.deval2498.com
+        - api.staging-baserepo.deval2498.com  # Change to your domain
+        - www.api.staging-baserepo.deval2498.com
       secretName: backend-tls
   rules:
-    - host: staging-baserepo.deval2498.com
+    - host: api.staging-baserepo.deval2498.com
       http:
         paths:
           - path: /
@@ -22,7 +22,7 @@ spec:
                 name: backend-service
                 port:
                   number: 80
-    - host: www.staging-baserepo.deval2498.com
+    - host: www.api.staging-baserepo.deval2498.com
       http:
         paths:
           - path: /
