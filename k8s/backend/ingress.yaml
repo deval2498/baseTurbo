@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: backend-ingress
+  name: backend-PLACEHOLDER_TAG_ENV-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -19,7 +19,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: backend-service
+                name: backend-PLACEHOLDER_TAG_ENV-service
                 port:
                   number: 80
     - host: www.api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com
@@ -29,6 +29,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: backend-service
+                name: backend-PLACEHOLDER_TAG_ENV-service
                 port:
                   number: 80
