@@ -63,7 +63,8 @@ jobs:
           sed -i "s|PLACEHOLDER_TAG_DOCKER_BUILD|production|g" k8s/backend/deployment.yaml
           sed -i "s|PLACEHOLDER_TAG_PORT|5006|g" k8s/backend/service.yaml
           sed -i "s|PLACEHOLDER_TAG_PORT|5006|g" k8s/backend/deployment.yaml
-          sed -i "s|PLACEHOLDER_TAG_PORT_STRING|"5006"|g" k8s/backend/deployment.yaml
+          sed -i "s|PLACEHOLDER_TAG_PORT_STRING|\"5006\"|g" k8s/backend/deployment.yaml
+
       
       - name: Apply Kubernetes Manifests
         run: |
