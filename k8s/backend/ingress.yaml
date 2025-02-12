@@ -10,7 +10,7 @@ spec:
     - hosts:
         - api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com  # Change to your domain
         - www.api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com
-      secretName: backend-tls
+      secretName: backend-tls-PLACEHOLDER_TAG_TLS_SECRET
   rules:
     - host: api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com
       http:
