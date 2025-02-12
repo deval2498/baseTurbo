@@ -19,4 +19,4 @@ spec:
             - containerPort: PLACEHOLDER_TAG_PORT
           env:
             - name: PORT
-              value: PLACEHOLDER_TAG_PORT
+              value: PLACEHOLDER_TAG_PORT_STRING
