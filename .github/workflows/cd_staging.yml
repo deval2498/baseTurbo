@@ -58,7 +58,8 @@ jobs:
       
       - name: Update Deployment YAML with SHA
         run: |
-          sed -i "s|PLACEHOLDER_TAG|${{ github.sha }}|g" k8s/backend/deployment.yaml
+          sed -i "s|PLACEHOLDER_TAG_SHA|${{ github.sha }}|g" k8s/backend/deployment.yaml
+          sed -i "s|PLACEHOLDER_TAG_ENV|${{ staging }}|g" k8s/backend/ingress.yaml
       
       - name: Apply Kubernetes Manifests
         run: |

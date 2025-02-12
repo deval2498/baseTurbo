@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: deval2498/baserepo-staging:PLACEHOLDER_TAG  # Change to your image
+          image: deval2498/baserepo-staging:PLACEHOLDER_TAG_SHA  # Change to your image
           ports:
             - containerPort: 5005
           env:
