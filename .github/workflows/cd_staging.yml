@@ -58,6 +58,7 @@ jobs:
         run: |
           sed -i "s|PLACEHOLDER_TAG_SHA|${{ github.sha }}|g" k8s/backend/deployment.yaml
           sed -i "s|PLACEHOLDER_TAG_ENV|staging|g" k8s/backend/ingress.yaml
+          sed -i "s|PLACEHOLDER_TAG_TLS_SECRET|staging|g" k8s/backend/ingress.yaml
       
       - name: Apply Kubernetes Manifests
         run: |
