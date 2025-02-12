@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-app
+  name: backend-PLACEHOLDER_TAG_ENV-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: backend-PLACEHOLDER_TAG_ENV
   template:
     metadata:
       labels:
-        app: backend
+        app: backend-PLACEHOLDER_TAG_ENV
     spec:
       containers:
-        - name: backend
-          image: deval2498/baserepo-staging:PLACEHOLDER_TAG_SHA  # Change to your image
+        - name: backend-PLACEHOLDER_TAG_ENV
+          image: deval2498/baserepo-PLACEHOLDER_TAG_DOCKER_BUILD:PLACEHOLDER_TAG_SHA  # Change to your image
           ports:
-            - containerPort: 5005
+            - containerPort: PLACEHOLDER_TAG_PORT
           env:
             - name: PORT
-              value: "5005"
+              value: PLACEHOLDER_TAG_PORT_STRING

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: backend-PLACEHOLDER_TAG_ENV-service
 spec:
   selector:
-    app: backend
+    app: backend-PLACEHOLDER_TAG_ENV
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 5005
+      targetPort: PLACEHOLDER_TAG_PORT
   type: ClusterIP
