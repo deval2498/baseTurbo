@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com  # Change to your domain
+        - www.api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com
+      secretName: backend-tls
+  rules:
+    - host: api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 80
+    - host: www.api.PLACEHOLDER_TAG_ENV-baserepo.deval2498.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 80

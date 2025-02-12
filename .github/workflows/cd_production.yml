@@ -23,6 +23,19 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+      - name: Set up Kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config  # Secure the file
+          export KUBECONFIG=$HOME/.kube/config
       
       - name: Login to docker hub
         if: github.event_name == 'push'
@@ -39,4 +52,15 @@ jobs:
           file: apps/server/Dockerfile
           push: true
           tags: deval2498/baserepo-production:${{ github.sha }} #change to your docker repo
+
+      - name: Update Deployment YAML with SHA
+        run: |
+          sed -i "s|PLACEHOLDER_TAG_SHA|${{ github.sha }}|g" k8s/backend/deployment.yaml
+          sed -i "s|PLACEHOLDER_TAG_ENV|production|g" k8s/backend/ingress.yaml
+      
+      - name: Apply Kubernetes Manifests
+        run: |
+          kubectl apply -f k8s/backend/deployment.yaml
+          kubectl apply -f k8s/backend/service.yaml
+          kubectl apply -f k8s/backend/ingress.yaml
     
